@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import 'dotenv/config';
 
 export const verifyToken = (req, res, next) => {
     let token = req.headers['authorization'];
@@ -17,7 +18,7 @@ export const verifyToken = (req, res, next) => {
          });
     }
 
-    jwt.verify(token[1], 'millavesereta123*-', (err, ) => {
+    jwt.verify(token[1], process.env.JWT_SECRET, (err, ) => {
         if (err) {
             return res.status(401).json({ 
                 msg: "user unauthorized",
